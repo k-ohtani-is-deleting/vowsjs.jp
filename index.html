@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
   <head>
-    <link rel="alternate stylesheet" type="text/less" href="../less/main.less">
-    <script src="../js/less.js" type="text/javascript"></script>
+    <link rel="alternate stylesheet" type="text/less" href="less/main.less">
+    <script src="js/less.js" type="text/javascript"></script>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link rel="alFternate" type="application/atom+xml" title="app - feed" href="index.xml" />
@@ -121,11 +121,11 @@ A nested context with no topics
   <div class="content">
     <nav>
       <a href="#intro">intro</a>
-      <a href="#docs" id="guide-link">guide</a>
       <a href="#installing">installing</a>
+      <a href="#docs" id="guide-link">guide</a>
       <a href="#reference">reference</a>
       <a href="#about">about</a>
-      <a href="http://github.com/cloudhead/vows">source <img id="github" src="../images/github.ico"/></a>
+      <a href="http://github.com/cloudhead/vows">source <img id="github" src="images/github.ico"/></a>
     </nav>
     <div id="dropdown">
       <ul>
@@ -144,13 +144,13 @@ A nested context with no topics
   <div class="content">
     <h1>Synopsis - 概要</h1>
 
-<p>Vowsとは、<a href="http://nodejs.org">Node.js</a>で動作する<a href="http://ja.wikipedia.org/wiki/%E3%83%93%E3%83%98%E3%82%A4%E3%83%93%E3%82%A2%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA">振舞駆動開発</a>フレームワークだ。</p>
+<p>Vowsとは、<a href="http://nodejs.org">Node.js</a>で動作する<a href="http://ja.wikipedia.org/wiki/%E3%83%93%E3%83%98%E3%82%A4%E3%83%93%E3%82%A2%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA">振舞駆動開発</a>フレームワークである。</p>
 
-<p>Vowsは非同期コードをテストするために作られた。並列に動くよう書かれたテストコードは並列に、順次に動くように書かれたコードは順次に実行される。</p>
+<p>Vowsは非同期にコードをテストするために作られた。順次に動くように書かれたコードは順次に実行され、並列に動くよう書かれたテストコードは並列に実行される。</p>
 
-<p>明解さと実行速度、UXが重視されている。</p>
+<p>目指したのは、明解さ、実行速度、そしてUXだ。</p>
 
-<p>以下はシンプルな例、「0除算」のテストだ:</p>
+<p>シンプルな「0除算」のテストの例は:</p>
 
 <pre><code>// division-by-zero-test.js
 
@@ -269,7 +269,7 @@ vows.describe('The Good Things').addBatch({
   <div class="content">
     <h1>Installing - インストール</h1>
 
-<p>Vowsをインストールするには、 <a href="http://github.com/isaacs/npm">npm</a> を使うのが最も簡単だ。つまり:</p>
+<p>Vowsをインストールするには、 <a href="http://github.com/isaacs/npm">npm</a> を使うのが最も簡単だ:</p>
 
 <pre><code>$ npm install vows
 </code></pre>
@@ -286,16 +286,16 @@ vows.describe('The Good Things').addBatch({
   <div class="content">
       <h1>Guide - ガイド</h1>
 
-<p>Vowsを理解するために、コンポーネントの総括的説明から初めて、続けていくつか詳細について深めていこう。</p>
+<p>Vowsを理解するために、コンポーネントの総括的な説明から始め、続けていくつか詳細について深めていこう。</p>
 
 <h2>テストスイートの構造</h2>
 
-<p>Vowsでのテストスイートは、テストのもっとも大きな単位だ。慣例として、1ファイル1テストスイートとし、スイートの名前をファイル名とする。テストスイートは <code>vows.describe</code> で生成する。</p>
+<p>Vowsでのテストスイートは、テストのもっとも大きな単位だ。慣例として、1ファイルには1テストスイートとし、スイートの名前をファイル名とする。テストスイートは <code>vows.describe</code> で生成する。</p>
 
 <pre><code>var suite = vows.describe('subject');
 </code></pre>
 
-<p>スイートにbatchでテストを追加するには、<code>addBatch</code> メソッドを使う。</p>
+<p>スイートにバッチテストを追加するには、<code>addBatch</code> メソッドを使う。</p>
 
 <pre><code>suite.addBatch({});
 </code></pre>
@@ -307,7 +307,7 @@ vows.describe('The Good Things').addBatch({
 
 <p>実行順序を指定したいときは、バッチを並べるとよい。</p>
 
-<p>バッチはいくつかの <em>context</em> を持ち、異なるコンポーネントや状態でのテストを実行するよう記述できる。</p>
+<p>バッチはいくつかの <em>context</em> を持ち、異なるコンポーネントや状態でのテストを実行するよう、記述することができる。</p>
 
 <pre><code>suite.addBatch({
    'A context': {},
@@ -317,7 +317,7 @@ vows.describe('The Good Things').addBatch({
 
 <p>contextは<em>並列</em>に、つまり完全に非同期に実行される。最終的にどのような順序で終わるかは不定だ。</p>
 
-<p>通常、 contextはいくつかの <em>topic</em> と <em>vow</em> を持ち、それらでテスト同士の組み合わせを定義している。</p>
+<p>通常、contextはいくつかの <em>topic</em> と <em>vow</em> を持ち、それらでテスト同士の組み合わせを定義している。</p>
 
 <pre><code>suite.addBatch({
    'A context': {
@@ -350,7 +350,7 @@ vows.describe('The Good Things').addBatch({
 
 <h3>まとめ</h3>
 
-<p>» <em>suite</em> は、0以上の <em>batches</em> を持ち、実行またはエクスポートできる。</p>
+<p>» <em>suite</em> は、0以上の <em>batch</em> を持ち、実行またはエクスポートできる。</p>
 
 <p>» <em>batch</em> とは、リテラルオブジェクトであり、ネストした <em>context</em> 構造を表現する。</p>
 
@@ -394,8 +394,8 @@ Context → Topic? Vow* Context*
 
 <h2>topic の動作</h2>
 
-<p><em>topic</em> を理解することが、Vowsを理解する一番の近道だ。
-他のテスティングフレームワークと違い、Vowsでは実行されるテストの対象（<em>topic</em>）と実行するテスト（<em>vow</em>）を明確に分離することが強いられている。</p>
+<p><em>topic</em> を理解することが、Vowsを理解する一番の近道となる。
+Vowsでは、他のテスティングフレームワークと違い、実行されるテストの対象（<em>topic</em>）と実行するテスト（<em>vow</em>）を明確に分離することが強いられている。</p>
 
 <p>シンプルなcontextの例から始めよう:</p>
 
@@ -407,7 +407,7 @@ Context → Topic? Vow* Context*
 </code></pre>
 
 <p>このように、topicが示す値は、テスト関数（以下、 <em>vow</em> と呼ぶことにする）の引数として渡される。
-さて、等価性を評価する別の例を見てみよう:</p>
+さて、同じテストを、別の記述で見てみよう:</p>
 
 <pre><code>{ topic: function () { return 42 },
   'should be equal to 42': function (topic) {
@@ -416,8 +416,8 @@ Context → Topic? Vow* Context*
 }
 </code></pre>
 
-<p>
-同じ動作になる。topicは関数でもよく、その場合は返却値がtopicとなる。さて、複数のvowがある場合はどうなるか？</p>
+<p>同じ動作になる。topicは関数でもよく、その場合は返却値がtopicとなる。
+さて、複数のvowがある場合はどうなるか？</p>
 
 <pre><code>{ topic: function () { return 42 },
   'should be a number': function (topic) {
@@ -433,7 +433,9 @@ Context → Topic? Vow* Context*
 
 <h3>スコープ</h3>
 
-<p>もしかすると、親topicの値が子topicの中で必要になることがあるかもしれない。これは簡単で、topic<em>スコープ</em>という概念で実現している。例を見てみよう：</p>
+<p>もしかすると、親topicの値が子topicの中で必要になることがあるかもしれない。
+これは簡単で、topic<em>スコープ</em>という概念で実現している。
+例を見てみよう：</p>
 
 <pre><code>{ topic: new(DataStore),
   'should respond to `get()` and `put()`': function (store) {
@@ -452,7 +454,8 @@ Context → Topic? Vow* Context*
 <p>この例では、最上位topicは内部topicへの引数として渡し、vowに渡されるのと同じように扱っている。
 わかりやすさのため、内部topicでは外部topicと同じ名前 <code>store</code> で定義している。</p>
 
-<p>スコープは単一階層に限定されないことに注意しよう。例えばこのような場合:</p>
+<p>スコープは単一階層に限定されないことに注意しよう。
+例えばこのような場合:</p>
 
 <pre><code>topic: function (a, /* Parent topic                     */
                  b, /* Parent of parent topic           */
@@ -460,7 +463,9 @@ Context → Topic? Vow* Context*
 </code></pre>
 
 <p>
-このとき、親topicの値は各topic関数に順序付けて渡される。直近の親は常に第一引数（<code>a</code>）、その外部topicは順に続く（<code>b</code> 、次に <code>c</code>）。玉ねぎを想像するといい。</p>
+このとき、親topicの値は各topic関数に順序付けて渡される。
+直近の親は常に第一引数（<code>a</code>）、その外部topicは順に続く（<code>b</code> 、次に <code>c</code>）。
+玉ねぎを想像するといい。</p>
 
 <h2>スイートを実行する</h2>
 
@@ -469,7 +474,8 @@ Context → Topic? Vow* Context*
 <pre><code>vows.describe('subject').addBatch({/* ... */}).run();
 </code></pre>
 
-<p><code>run</code> メソッドの引数として、すべてのテストが終わった後に呼ばれるコールバック関数を指定できる。コールバック関数には、テスト結果として次のようなオブジェクトとして渡される:</p>
+<p><code>run</code> メソッドの引数として、すべてのテストが終わった後に呼ばれるコールバック関数を指定できる。
+コールバック関数には、テスト結果として次のようなオブジェクトとして渡される:</p>
 
 <pre><code>{ honored: 145,
   broken:    4,
@@ -480,7 +486,7 @@ Context → Topic? Vow* Context*
 };
 </code></pre>
 
-<p>さて、テストスイート <em>subject-test.js</em> を書いたとして、それを実行してみよう:</p>
+<p>さて、テストスイート <em>subject-test.js</em> を書いたとする。それを実行してみよう:</p>
 
 <pre><code>$ node subject-test.js
 </code></pre>
@@ -491,9 +497,8 @@ Context → Topic? Vow* Context*
 
 <p>複数ファイルにまたがるなどでテストが複雑になってくると、1コマンドで実行したくなるだろう。</p>
 
-<p>
-Vowsには <code>vows</code> というテストランナーがあり、複数のテストスイートを一度に実行できる。
-vowsコマンドを使うには、テストを実行する代わりにエクスポートする必要がある。
+<p>Vowsには <code>vows</code> というテストランナーを用意していて、複数のテストスイートを一度に実行できる。
+vowsコマンドを使うには、テストをrunする代わりにエクスポートする必要がある。
 いくつかの方法があるが、 <code>export</code> メソッドを使うのが簡単だ:</p>
 
 <pre><code>// subject-test.js
@@ -501,8 +506,7 @@ vowsコマンドを使うには、テストを実行する代わりにエクス�
 vows.describe('subject').addBatch({/* ... */}).export(module);
 </code></pre>
 
-<p>
-<code>export</code> は一つの引数をとり、エクスポートしたいモジュールを指定する。
+<p><code>export</code> は一つの引数をとり、エクスポートしたいモジュールを指定する。
 幸いなことに、nodeにはカレントモジュールを参照する <code>module</code> というグローバル変数があるので、それを指定するとよい。</p>
 
 <p>では、テストランナーでこのファイルを実行してみよう:</p>
@@ -510,16 +514,19 @@ vows.describe('subject').addBatch({/* ... */}).export(module);
 <pre><code>$ vows subject-test.js
 </code></pre>
 
-<p>結果は <code>node</code> コマンドで直接実行したものと全く同じになる。違いは、<code>vows</code> では次のようにできることだ:</p>
+<p>結果は <code>node</code> コマンドで直接実行したものと全く同じになる。
+違いは、<code>vows</code> では次のようにできることだ:</p>
 
 <pre><code>$ vows test/*
 </code></pre>
 
 <p>
 <em>test/</em> フォルダ以下のすべてのテストを実行し、結果を結合している。 <code>vows</code> コマンドには、オプションを渡すこともできる。
-たとえば、"spec style"が見たいときには <code>--spec</code> を指定すればよい。指定できるオプションについては、他の章を参照しよう。</p>
+たとえば、"spec style"で見たいときは <code>--spec</code> を指定すればよい。
+指定できるオプションについては、他の章を参照しよう。</p>
 
-<p>テストスイートをエクスポートする別の方法として、 <code>exports</code> オブジェクトを単純に足す方法もある。APIを通じたエクスポートと同じ結果が得られる:</p>
+<p>テストスイートをエクスポートする別の方法として、 <code>exports</code> オブジェクトに単純に足す方法もある。
+一般的なAPIでのエクスポートと同じ結果が得られる:</p>
 
 <pre><code>exports.suite1 = vows.describe('suite one');
 exports.suite2 = vows.describe('suite two');
@@ -560,12 +567,12 @@ vows.describe('subject') // Create the suite, describing 'subject'
 
 <p>ここで重要なのは &lsquo;<code>this.callback</code>&rsquo; 関数で、すべての topic に対して用意されている。</p>
 
-<p>
-<code>this.callback</code> が<em>呼ばれる</em>と、テスト関数それぞれにに引数として渡され、テスト関数ではあたかもtopic関数が値を返したかのように動く。</p>
+<p><code>this.callback</code> が<em>呼ばれる</em>と、テスト関数それぞれにに引数として渡され、テスト関数ではあたかもtopic関数が値を返したかのように動く。</p>
 
 <p>本質的には、同期関数呼び出しとコールバック関数を分離することができるようになる。</p>
 
-<p>これが、Vowsでの非同期呼び出しの流れだ。何も渡されないときに警告することもできる。</p>
+<p>これが、Vowsでの非同期呼び出しの流れだ。
+何も渡されないときに警告することもできる。</p>
 
 <blockquote><p>&lsquo;<code>this.callback</code>&rsquo; を使ったtopicはreturnしてはいけないことに注意しよう。
 同様に、returnしないtopicは必ず &lsquo;<code>this.callback</code>&rsquo; を使わなければならない。</p></blockquote>
@@ -617,13 +624,15 @@ topicは <code>EventEmitter</code> インスタンスを返し、Emitterの <cod
 }
 </code></pre>
 
-<p>この例では、ネストしたcontextを使って、ネストしたcallbackを偽装している。お察しの通り、親topicの結果は子topicに対して引数として渡される。</p>
+<p>この例では、ネストしたcontextを使って、ネストしたcallbackを偽装している。
+お察しの通り、親topicの結果は子topicに対して引数として渡される。</p>
 
 <p>そのため、Vowsは基本的に非同期にも関わらず、この例ではほとんどの部分で順次に実行される。</p>
 
 <hr />
 
-<p>では、次の例を見てみよう。デバイスをチェックする並列テストの例:</p>
+<p>では、次の例を見てみよう。
+デバイスをチェックする並列テストの例:</p>
 
 <pre><code>{ '/dev/stdout': {
     topic:    function () { path.exists('/dev/stdout', this.callback) },
@@ -640,24 +649,27 @@ topicは <code>EventEmitter</code> インスタンスを返し、Emitterの <cod
 }
 </code></pre>
 
-<p>この例では、テストはどんな順で終わってもよく、互いの結果にを使うこともない。
+<p>この例では、テストはどんな順で終わってもよく、互いの結果を利用することもない。
 最後のI/O呼び出しが完了し、そのアサーションが実行し終わったら、テストスイート全体が終了する。</p>
 
 <p>つまり、<em>兄弟関係のcontext</em>は並列に実行され、<em>ネストしたcontext</em>は順次に実行されるのだ。
-これらは非同期に起こることに注意しよう。親contextの終了を待つcontextがあったとしても、親の兄弟関係にあるcontextはその間に実行されることになる。</p>
+これらは非同期に起こることに注意しよう。
+親contextの終了を待つcontextがあったとしても、親の兄弟関係にあるcontextはその間に実行されることになる。</p>
 
 <h2>アサーション</h2>
 
-<p>Vowsはnodeのアサーションモジュールを継承しており、node標準でも便利な関数はあるのだが、エラーレポーティングをさらに充実させている。</p>
+<p>node標準のassertには便利な関数はあるが、Vowsはアサーションモジュールを継承し、エラーレポートをさらに充実させている。</p>
 
-<p>値をテストするときは、エラーレポートを充実させた、より特化したアサーション関数を使うのが最良の選択だ。意図を明確にすることができる。</p>
+<p>値をテストするときは、エラーレポートを充実させた、より特化したアサーション関数を使うのが最良の選択だ。
+意図を明確にすることができる。</p>
 
 <p>次のような配列があるとしよう:</p>
 
 <pre><code>var ary = [1, 2, 3];
 </code></pre>
 
-<p>そして、要素数が5個あるかの検証をしてみることにする。node標準の <code>assert.equal</code> では、このように書く:</p>
+<p>そして、要素数が5個あるかの検証をしてみることにする。
+node標準の <code>assert.equal</code> では、このように書く:</p>
 
 <pre><code>assert.equal(ary.length, 5);
 </code></pre>
@@ -677,16 +689,16 @@ topicは <code>EventEmitter</code> インスタンスを返し、Emitterの <cod
 <pre><code>expected [1, 2, 3] to have 5 elements
 </code></pre>
 
-<p>Vowsでは他にもアサーション関数として、<code>assert.match</code>・<code>assert.instanceOf</code>・<code>assert.include</code>・<code>assert.isEmpty</code>などを用意している。<a href="#reference">リファレンス</a>に全リストがあるので、見てみよう。</p>
+<p>Vowsでは他にもアサーション関数として、<code>assert.match</code>・<code>assert.instanceOf</code>・<code>assert.include</code>・<code>assert.isEmpty</code>などを用意している。
+<a href="#reference">リファレンス</a>に全リストがあるので、見てみよう。</p>
 
 <h2>マクロ</h2>
 
-<p>
-テストスイートを通じて使いたい抽象的なテストが有効なことがあるかもしれない。
+<p>テストスイートを通じて使いたい抽象的なテストが有効なことがあるかもしれない。
 Vowsでの <em>batch</em> とは、正確に言うと、（データ構造に似た）木構造のObjectリテラルである。
 つまり、とてもパワフルなのだ。今からそれをご覧に入れよう。</p>
 
-<p>作ったコードに対し、HTTPステータスコードをテストするコードを沢山書きたいとする。
+<p>さて、作ったコードに対し、HTTPステータスコードをテストするコードを沢山書きたいとする。
 まずは非同期に、 <code>client</code> ライブラリを使って単純に書くと、こうなる:</p>
 
 <pre><code>{ topic: function () {
@@ -698,7 +710,9 @@ Vowsでの <em>batch</em> とは、正確に言うと、（データ構造に似
 }
 </code></pre>
 
-<p>…悪くはない。しかし、APIなんかのテストでは、これを100個は書くことになるだろう。マクロを使って書き直してみよう:</p>
+<p>…悪くはない。
+しかし、APIなんかのテストでは、これを100個は書くことになるだろう。
+マクロを使って書き直してみよう:</p>
 
 <pre><code>function assertStatus(code) {
     return function (e, res) {
@@ -707,7 +721,8 @@ Vowsでの <em>batch</em> とは、正確に言うと、（データ構造に似
 }
 </code></pre>
 
-<p>この関数は、ステータスコードを引数にとって、ステータスコードが一致するかテストする関数を返す関数だ。先のテストは、このように改善することができる:</p>
+<p>この関数は、ステータスコードを引数にとって、ステータスコードが一致するかテストする関数を返す関数だ。
+先のテストは、このように改善することができる:</p>
 
 <pre><code>{ topic: function () {
     client.get('/resources/42', this.callback);
@@ -716,7 +731,8 @@ Vowsでの <em>batch</em> とは、正確に言うと、（データ構造に似
 }
 </code></pre>
 
-<p>ずっと良くなった。では、topicはどうだろう。API呼び出しを使ってマクロを書いてみよう:</p>
+<p>ずっと良くなった。
+では、topicはどうだろう。API呼び出しを使ってマクロを書いてみよう:</p>
 
 <pre><code>var api = {
     get: function (path) {
@@ -734,7 +750,8 @@ Vowsでの <em>batch</em> とは、正確に言うと、（データ構造に似
 }
 </code></pre>
 
-<p>すばらしい。このマクロを使うと、次のように書ける:</p>
+<p>ファンタスティック。
+このマクロを使うと、次のように書ける:</p>
 
 <pre><code>{   'GET /': {
         topic: api.get('/'),
@@ -758,12 +775,16 @@ Vowsでの <em>batch</em> とは、正確に言うと、（データ構造に似
 }
 </code></pre>
 
-<p>もっと進化できないか？できるに決まってる。むしろ、ここからが<em>本番</em>だ。context生成テストの作り方をお見せしよう。</p>
+<p>もっと進化できないか？
+できるに決まってる。
+むしろ、ここからが<em>本番</em>だ。context生成テストの作り方をお見せしよう。</p>
 
 <p><em>topic</em> を生成する関数と <em>vow</em> を生成する関数を別々に書くの代わりに、topicとvowを含む <em>context</em> を生成する関数を作ってみよう。</p>
 
-<p>topicは <em>context</em> に沿ったリクエストのように振る舞う。contextの説明文からapiリクエストを生成するのが、面白い部分だ。
-これにより、説明文からテストコードが作ることができるようになった。つまり、このように実装できる:</p>
+<p>topicは <em>context</em> に沿ったリクエストのように振る舞う。
+contextの説明文からapiリクエストを生成するのが、面白い部分だ。
+これにより、説明文からテストコードが作ることができるようになった。
+つまり、このように実装できる:</p>
 
 <pre><code>//
 // Send a request and check the response status.
@@ -821,7 +842,7 @@ GET  /resources (no key)
   <div class="content">
     <h1>Reference - リファレンス</h1>
 
-<p>コマンドライン（CLI）およびアサーションモジュールのドキュメントはこちらです。</p>
+<p>コマンドライン（CLI）およびアサーションモジュールのドキュメント</p>
 
 <h2>テストランナー</h2>
 
@@ -834,12 +855,12 @@ GET  /resources (no key)
 $ vows tests/*
 </code></pre>
 
-<p><em>test/</em> フォルダや <em>spec/</em> フォルダの全テストを実行する</p>
+<p><em>test/</em> フォルダまたは <em>spec/</em> フォルダの全テストを実行する</p>
 
 <pre><code>$ vows
 </code></pre>
 
-<p>ウォッチモード</p>
+<p>ウォッチモード（ファイル更新を継続的に監視する）</p>
 
 <pre><code>$ vows -w
 $ vows --watch
@@ -975,10 +996,15 @@ assert.doesNotThrow(function () { 1 + 1 }, Error);
 
 <section id="about">
   <div class="content">
-    <h1>About</h1>
+    <h1>In Other Languages - 他の言語</h1>
+<p>英語（オリジナルサイト）: <a href="http://vowsjs.org">http://vowsjs.org</a></p>
+  </div>
+
+  <div class="content">
+    <h1>About - Vowsについて</h1>
 
 <p>Vows was developed by <a href="http://cloudhead.io">Alexis Sellier</a>, more commonly known as <a href="http://cloudhead.io">cloudhead</a>.</p>
-<p>Translated into Japanese by <a href="http://twitter.com/katzchang">Kazunori Otani</a>, see on <a href="http://github.com/katzchang/vowsjs.jp">github</a>.</p>
+<p>Translated into Japanese by <a href="http://twitter.com/katzchang">Kazunori Otani</a>, on <a href="http://github.com/katzchang/vowsjs.jp">github</a>.</p>
 
     <footer>
         <p>powered by <a href="http://cloudhead.io/toto">toto</a>, <a href="http://github.com/cloudhead/less.js">LESS</a> and <a href="http://github.com/cloudhead/hijs">hijs</a></p>
@@ -993,7 +1019,7 @@ assert.doesNotThrow(function () { 1 + 1 }, Error);
            src="http://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"
            alt="Fork me on GitHub" />
     </a>
-    <script src="../js/hijs.js"></script>
+    <script src="js/hijs.js"></script>
   </body>
 </html>
 
