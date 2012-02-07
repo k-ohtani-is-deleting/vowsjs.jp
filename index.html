@@ -157,7 +157,7 @@ A nested context with no topics
 var vows = require('vows'),
     assert = require('assert');
 
-// Create a Test Suite
+// テストスイートを作成
 vows.describe('Division by Zero').addBatch({
     'when dividing a number by zero': {
         topic: function () { return 42 / 0 },
@@ -178,7 +178,7 @@ vows.describe('Division by Zero').addBatch({
             }
         }
     }
-}).run(); // Run it
+}).run(); // 実行する
 </code></pre>
 
 <p>実行するには:</p>
@@ -254,7 +254,7 @@ vows.describe('The Good Things').addBatch({
             }
         }
     }
-}).export(module); // Export the Suite
+}).export(module); // テストスイートをエクスポート
 </code></pre>
 
 <p>テストランナーで実行してみよう：</p>
@@ -302,7 +302,7 @@ vows.describe('The Good Things').addBatch({
 
 <p>スイートにはバッチをいくらでも追加できる。バッチは<em>順次</em>に実行される。</p>
 
-<pre><code>suite.addBatch({/* run 1st */}).addBatch({/* 2nd */}).addBatch({/* 3rd */});
+<pre><code>suite.addBatch({/* 最初に実行 */}).addBatch({/* 次に実行 */}).addBatch({/* 最後に実行 */});
 </code></pre>
 
 <p>実行順序を指定したいときは、バッチを並べるとよい。</p>
@@ -321,9 +321,9 @@ vows.describe('The Good Things').addBatch({
 
 <pre><code>suite.addBatch({
    'A context': {
-        topic: function () {/* Do something async */},
+        topic: function () {/* 非同期に実行される処理 */},
         'I am a vow': function (topic) {
-            /* Test the result of the topic */
+            /* topicの結果をテストする */
         }
     },
    'Another context': {}
@@ -334,16 +334,16 @@ vows.describe('The Good Things').addBatch({
 
 <pre><code>suite.addBatch({
    'A context': {
-       topic: function () {/* Do something async */},
+       topic: function () {/* 非同期に実行される処理 */},
        'I am a vow': function (topic) {
-           /* Test the result of the topic */
+           /* topicの結果をテストする */
        },
        'A sub-context': {
-           /* Executed when the tests above finish running */
+           /* 上のテストが終わった後に実行される */
        }
    },
    'Another context': {
-       /* Executed in parallel to 'A context' */
+       /* 'A context'と並列で実行される */
     }
 });
 </code></pre>
@@ -457,9 +457,9 @@ Vowsでは、他のテスティングフレームワークと違い、実行さ�
 <p>スコープは単一階層に限定されないことに注意しよう。
 例えばこのような場合:</p>
 
-<pre><code>topic: function (a, /* Parent topic                     */
-                 b, /* Parent of parent topic           */
-                 c  /* Parent of parent of parent topic */) {}
+<pre><code>topic: function (a, /* 親topic */
+                 b, /* 親topicの親topic */
+                 c  /* 親topicの親topicの親topic */) {}
 </code></pre>
 
 <p>
@@ -535,13 +535,13 @@ exports.suite2 = vows.describe('suite two');
 <h3>まとめると…</h3>
 
 <pre><code>// subject-test.js
-// A test suite, describing 'subject'
+// テストスイート 'subject'
 
-vows.describe('subject') // Create the suite, describing 'subject'
-    .addBatch({})        // Add the 1st batch
-    .addBatch({})        // Add a 2nd batch
-    .addBatch({})        // Add a 3rd batch
-    .export(module);     // Export it
+vows.describe('subject') // スイート'subject'を定義
+    .addBatch({})        // 1番目のbatchを追加
+    .addBatch({})        // 2番目のbatchを追加
+    .addBatch({})        // 3番目のbatchを追加
+    .export(module);     // エクスポートする
 </code></pre>
 
 <h2>非同期テストを記述する</h2>
@@ -556,11 +556,11 @@ vows.describe('subject') // Create the suite, describing 'subject'
     fs.stat('~/FILE', this.callback);
   },
   'can be accessed': function (err, stat) {
-    assert.isNull   (err);        // We have no error
-    assert.isObject (stat);       // We have a stat object
+    assert.isNull   (err);        // エラーがないこと
+    assert.isObject (stat);       // statがオブジェクトであること
   },
   'is not empty': function (err, stat) {
-    assert.isNotZero (stat.size); // The file size is &gt; 0
+    assert.isNotZero (stat.size); // ファイルサイズ &gt; 0 であること
   }
 }
 </code></pre>
@@ -592,11 +592,11 @@ topicは <code>EventEmitter</code> インスタンスを返し、Emitterの <cod
     return promise;
   },
   'can be accessed': function (err, stat) {
-    assert.isNull   (err);        // We have no error
-    assert.isObject (stat);       // We have a stat object
+    assert.isNull   (err);        // エラーがないこと
+    assert.isObject (stat);       // statがオブジェクトであること
   },
   'is not empty': function (err, stat) {
-    assert.isNotZero (stat.size); // The file size is &gt; 0
+    assert.isNotZero (stat.size); // ファイルサイズ &gt; 0 であること
   }
 }
 </code></pre>
@@ -787,25 +787,25 @@ contextの説明文からapiリクエストを生成するのが、面白い部�
 つまり、このように実装できる:</p>
 
 <pre><code>//
-// Send a request and check the response status.
+// リクエストを送信し、レスポンスのステータスをチェックする
 //
 function respondsWith(status) {
     var context = {
         topic: function () {
-            // Get the current context's name, such as "POST /"
-            // and split it at the space.
+            // "POST /"のように定義されたカレントのcontext名を取得し、
+            // 空白でsplitする。
             var req    = this.context.name.split(/ +/), // ["POST", "/"]
                 method = req[0].toLowerCase(),          // "post"
                 path   = req[1];                        // "/"
 
-            // Perform the contextual client request,
-            // with the above method and path.
+            // 上記methodとpathで、
+            // コンテキスト上にあるclientオブジェクトからリクエストを送信する。
             client[method](path, this.callback);
         }
     };
-    // Create and assign the vow to the context.
-    // The description is generated from the expected status code
-    // and status name, from node's http module.
+    // contextにvowを追加する。
+    // ステータス番号と、対応するステータス名をnodeのhttpモジュールを使って取得し、
+    // vowの名前を定義する。
     context['should respond with a ' + status + ' '
            + http.STATUS_CODES[status]] = assertStatus(status);
 
